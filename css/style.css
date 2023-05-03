@@ -1,0 +1,28 @@
+body{
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    /* background-color: rgb(39, 39, 39); */
+    background: linear-gradient(170deg, rgba(39,39,39,1) 0%, rgba(20,20,20,1)80%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn-box{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+h1, h2 {
+    color: white;
+    text-align: center;
+}
+button:active{
+    background-color: grey;
+}
+.active_btn{
+    background-color: rgb(49, 49, 49);
+    color: white;
+}
+button, input{
+    border-radius: 10px;
+}
