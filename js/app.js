@@ -5,7 +5,9 @@ let borraBtn    = document.querySelector('#goma');
 let colorInput  = document.querySelector('#color');
 let clearBtn    = document.querySelector('#clear');
 let saveBtn     = document.querySelector('#save');
-let fileInput  = document.querySelector('#file_input');
+let fileInput   = document.querySelector('#upload');
+let cleanImg    = document.querySelector('#cleanImg'); 
+let filtesBtn   = document.querySelectorAll('.filters');
 
 //////////////////////////////// Setup global variables
 let canvasWidth  = canvas.width;
@@ -19,6 +21,7 @@ let ancho = 0;
 let pen = null;
 let clicPen = false;
 let colorPen = null;
+let picture = null;
 
 //////////////////////////////// Principal
 
@@ -34,7 +37,6 @@ function main(){
 // COLOR 
 colorInput.addEventListener('change', () => {
     penColor = colorInput.value;
-    console.log(penColor);
     clicBorrar = false;
     clicPen = true;
     colorPen = penColor;    
@@ -42,23 +44,12 @@ colorInput.addEventListener('change', () => {
 
 });
 
-// INPUT 
+// CARGAR IMAGEN 
 fileInput.addEventListener('change', () => {
-    const img = new Image();
-    //img.src = "./logo.png";
-    img.src = URL.createObjectURL(file_input.files[0]);
-    img.onload = () => {
-        // Dibujar la imagen en el canvas
-        ctx.drawImage(img, 0, 0);
-
-        // Obtener los datos de los píxeles de la imagen
-        const imageData = ctx.getImageData(0, 0, img.width, img.height);
-        const data = imageData.data;
-
-        // Mostrar la imagen filtrada en el canvas
-        ctx.putImageData(imageData, 0, 0);
-    };
-
+    clearCanvas();
+    let src = URL.createObjectURL(fileInput.files[0]);
+    picture = new Picture(canvasWidth, canvasHeight, ctx, src);
+    picture.draw();
 });
 
 // SAVE 
@@ -69,10 +60,16 @@ saveBtn.addEventListener('click', () =>{
     link.click();
 });
 
-// CLEAR  
+// CLEAR CANVAS
 clearBtn.addEventListener('click', () =>{
     clearCanvas();
-    console.log('clear');
+
+});
+
+// CLEAR IMAGEN
+cleanImg.addEventListener('click', () =>{
+    picture.clear();
+
 });
 
 
@@ -108,13 +105,44 @@ borraBtn.addEventListener('click', (e) => {
     }    
 });
 
+
+// FILTROS
+
+filtesBtn.forEach( filtro => { filtro.addEventListener('click', () => {
+    let idFiltro = filtro.id;
+    switch (idFiltro) {
+        case 'sepia':
+            picture.filterSepia();
+            break;
+        case 'b&w':
+            picture.filterBW();
+            break;
+        case 'invert':
+            picture.filterInvert();
+            break;
+        case 'brillo':
+            picture.filterBright();
+            break;
+        case 'binary':
+            picture.filterBinary();
+            break;
+        case 'border':
+            picture.filterBorder();
+            break;
+        case 'satu':
+            picture.filterSatu();
+            break;
+        case 'blur':
+            picture.filterBlur();
+            break;
+    }
+})})
+
 //////////////// MOUSE event
 
 canvas.addEventListener ('mousedown', (e) => {
     mouseDown = true;
     mouseUp = false;
-    console.log('color de pen', colorPen);
-    penColor = colorInput.value;
     pen = new Pen((e).offsetX, (e).offsetY, colorPen, ctx, ancho);
 });
 

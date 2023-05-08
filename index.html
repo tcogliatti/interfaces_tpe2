@@ -13,18 +13,45 @@
         <h1>Paint en Canvas</h1>
         <h2>Tomás Cogliatti</h2>
     </div>
-    <input type="file" id="file_input">
+
+    <div class="btn-box">
+        <!-- <button id="upload">Cargar Imagen</button> -->
+        <input type="file" id="upload">
+        <button id="cleanImg">Limpiar imagen</button>
+        <button id="save">Guardar</button>
+    </div>
+
     <canvas id="canvas" width="500" height="500"></canvas>
+   
     <div class="btn-box">
         <button id="lapiz">Lapiz</button>
         <button id="goma">Borrador</button>
-        <button id="save">Guardar</button>
         <input type="color" id="color">
         <button id="clear">Limpiar</button>
-        
     </div>
 
-    <script src="./js/app.js"></script>
+    <div class="btn-box">
+        <button class="filters" id="sepia"  >Sepia</button>
+        <button class="filters" id="b&w"    >Escala de Grises</button>
+        <button class="filters" id="invert" >Invertido</button>
+        <button class="filters" id="brillo" >Brillo</button>
+        <button class="filters" id="binary" >Brinarización</button>
+        <button class="filters" id="border" >Detección de Bordes</button>
+        <button class="filters" id="satu"   >Saturación</button>
+        <button class="filters" id="blur"   >Desenfoque</button>
+    </div>
+
     <script src="./js/Pen.js"></script>
+    <script src="./js/Picture.js"></script>
+    <script src ="./js/filters/Operador.js"></script>
+    <script src ="./js/filters/CalcSepia.js"></script>
+    <script src ="./js/filters/CalcBW.js"></script>
+    <script src ="./js/filters/CalcInvert.js"></script>
+    <script src ="./js/filters/CalcBright.js"></script>
+    <script src ="./js/filters/CalcBinary.js"></script>
+    <script src ="./js/filters/CalcBlur.js"></script>
+    <script src ="./js/filters/CalcSatu.js"></script>
+    <script src="./js/app.js"></script>
+
 </body>
 </html>
