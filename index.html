@@ -25,88 +25,88 @@
     </div>
 
     <div class="container">
-    <div class="box-ppal">
+        <div class="box-ppal">
 
-        <canvas id="canvas" width="700" height="400"></canvas>
-       
+            <canvas id="canvas" width="700" height="400"></canvas>
 
-        <div class="tool-box">
-            <div class="box-filer-input">
 
-                <div class="box-input">
-                    <input class="inputTool" type="color" id="color">
+            <div class="tool-box">
+                <div class="box-filer-input">
+
+                    <div class="box-input">
+                        <input class="inputTool" type="color" id="color">
                         <input class="inputTool" type="button" id="lapiz">
                         <input class="rangeTool" id="rangePen" type="range" min="1" max="25" value="5" step="1">
+                    </div>
+                </div>
+                <div class="box-filer-input">
+                    <div class="box-input">
+                        <input class="inputTool" type="button" id="goma">
+                        <input class="rangeTool" id="rangeGoma" type="range" min="1" max="50" value="15" step="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-aux">
+                <input class="inputTool" type="button" id="clear">
+                <input class="inputTool" type="button" id="save">
+            </div>
+
+
+        </div>
+
+        <div class="box-filter">
+            <div class="box-filer-input">
+                <div class="box-input">
+                    <input type="button" class="filters" id="sepia">
+                    <label for="sepia">Sepia</label>
+                </div>
+                <input class="rangeFilter" id="sepiaAmonut" type="range" min="0" max=100 value="50" step="10">
+            </div>
+            <div class="box-filer-input">
+                <div class="box-input">
+                    <input type="button" class="filters" id="b&w">
+                    <label for="b&w">Escala de Grises</label>
+                </div>
+                <input class="rangeFilter" id="b&wAmount" type="range" min="0" max="100" value="90" step="10">
+            </div>
+            <div class="box-filer-input">
+                <div class="box-input">
+                    <input type="button" class="filters" id="invert">
+                    <label for="invert">Invertido</label>
                 </div>
             </div>
             <div class="box-filer-input">
                 <div class="box-input">
-                    <input class="inputTool" type="button" id="goma">
-                    <input class="rangeTool" id="rangeGoma" type="range" min="1" max="50" value="15" step="1">
+                    <input type="button" class="filters" id="brillo">
+                    <label for="brillo">Brillo</label>
                 </div>
-            </div>
-        </div>
-
-        <div class="box-aux">
-            <input class="inputTool" type="button" id="clear">
-            <input class="inputTool" type="button" id="save">
-        </div>
-    
-    
-    </div>    
-
-    <div class="box-filter">
-        <div class="box-filer-input">
-            <div class="box-input">
-                <input type="button" class="filters" id="sepia">
-                <label for="sepia">Sepia</label>
-            </div>
-                <input class="rangeFilter" id="sepiaAmonut" type="range" min="0" max=100 value="50" step="10">
-        </div>
-        <div class="box-filer-input">
-            <div class="box-input">
-                <input type="button" class="filters" id="b&w">
-                <label for="b&w">Escala de Grises</label>
-            </div>
-                <input class="rangeFilter" id="b&wAmount" type="range" min="0" max="100" value="90" step="10">
-        </div>
-        <div class="box-filer-input">
-            <div class="box-input">
-                <input type="button" class="filters" id="invert">
-                <label for="invert">Invertido</label>
-            </div>
-        </div>
-        <div class="box-filer-input">
-            <div class="box-input">
-                <input type="button" class="filters" id="brillo">
-                <label for="brillo">Brillo</label>
-            </div>
                 <input class="rangeFilter" id="brilloAmount" type="range" min="0" max="100" value="60" step="5">
-        </div>
-        <div class="box-filer-input">
-            <div class="box-input">
-                <input type="button" class="filters" id="binary">
-                <label for="binary">Brinarización</label>
             </div>
+            <div class="box-filer-input">
+                <div class="box-input">
+                    <input type="button" class="filters" id="binary">
+                    <label for="binary">Brinarización</label>
+                </div>
                 <input class="rangeFilter" id="binaryAmount" type="range" min="0" max="100" value="50" step="1">
-        </div>
-        <div class="box-filer-input">
-            <div class="box-input">
-                <input type="button" class="filters" id="satu">
-                <label for="satu">Saturación</label>
             </div>
+            <div class="box-filer-input">
+                <div class="box-input">
+                    <input type="button" class="filters" id="satu">
+                    <label for="satu">Saturación</label>
+                </div>
                 <input class="rangeFilter" id="satuAmount" type="range" min="0" max="100" value="90" step="10">
-        </div>
-        <div class="box-filer-input">
-            <div class="box-input">
-                <input type="button" class="filters" id="blur">
-                <label for="blur">Desenfoque</label>
             </div>
+            <div class="box-filer-input">
+                <div class="box-input">
+                    <input type="button" class="filters" id="blur">
+                    <label for="blur">Desenfoque</label>
+                </div>
                 <input class="rangeFilter" id="blurAmount" type="range" min="1" max="8" value="3" step="10">
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 
     <script src="./js/Pen.js"></script>

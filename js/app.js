@@ -48,6 +48,7 @@ colorInput.addEventListener('change', () => {
 
 // CARGAR IMAGEN 
 uploadButton.addEventListener('click', () => {
+    console.log('uploda');
     fileInput.click();
 });
 fileInput.addEventListener('change', () => {
@@ -131,28 +132,42 @@ borraBtn.addEventListener('click', (e) => {
 
 // FILTROS
 filtesBtn.forEach( filtro => { filtro.addEventListener('click', () => {
+    deselector()
     let idFiltro = filtro.id;
     switch (idFiltro) {
         case 'sepia':
             picture.filterSepia(rangeFilter[0].value);
+            rangeFilter[0].classList.add('selected');
+            filtro.classList.add('selected');
             break;
         case 'b&w':
             picture.filterBW(rangeFilter[1].value);
+            rangeFilter[1].classList.add('selected');
+            filtro.classList.add('selected');
             break;
         case 'invert':
             picture.filterInvert();
+            filtro.classList.add('selected');
             break;
         case 'brillo':
             picture.filterBright(rangeFilter[2].value);
+            rangeFilter[2].classList.add('selected');
+            filtro.classList.add('selected');
             break;
         case 'binary':
             picture.filterBinary(rangeFilter[3].value);
+            rangeFilter[3].classList.add('selected'),
+            filtro.classList.add('selected');
             break;
         case 'satu':
             picture.filterSatu(rangeFilter[4].value);
+            rangeFilter[4].classList.add('selected');
+            filtro.classList.add('selected');
             break;
         case 'blur':
             picture.filterBlur(rangeFilter[5].value);
+            rangeFilter[5].classList.add('selected');
+            filtro.classList.add('selected');
             break;
     }
 })})
@@ -182,6 +197,14 @@ rangeFilter.forEach( amount => { amount.addEventListener('change', () => {
     }
 })})
 
+function deselector(){
+    rangeFilter.forEach( amount => { 
+        amount.classList.remove('selected')
+    });
+    filtesBtn.forEach( filtro => {
+        filtro.classList.remove('selected')
+    });
+}
 colorInput.addEventListener('change', () => {
     if(clicPen)
         colorPen = colorInput.value;    
