@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,51 +8,119 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>Entregable 2</title>
 </head>
+
 <body onload="main()">
 
-    <div>
-        <h1>Paint en Canvas</h1>
-        <h2>Tomás Cogliatti</h2>
+    <div class="header-container">
+        <div class="header">
+            <h1>Chori<span>Paint</span></h1>
+        </div>
     </div>
 
-    <div class="btn-box">
-        <!-- <button id="upload">Cargar Imagen</button> -->
+
+    <div class="img-box">
+        <input class="inputTool" type="button" id="cleanImg">
         <input type="file" id="upload">
-        <button id="cleanImg">Limpiar imagen</button>
-        <button id="save">Guardar</button>
+        <input class="inputTool" type="button" id="uploadButton">
     </div>
 
-    <canvas id="canvas" width="500" height="500"></canvas>
-   
-    <div class="btn-box">
-        <button id="lapiz">Lapiz</button>
-        <button id="goma">Borrador</button>
-        <input type="color" id="color">
-        <button id="clear">Limpiar</button>
+    <div class="container">
+    <div class="box-ppal">
+
+        <canvas id="canvas" width="700" height="400"></canvas>
+       
+
+        <div class="tool-box">
+            <div class="box-filer-input">
+
+                <div class="box-input">
+                    <input class="inputTool" type="color" id="color">
+                        <input class="inputTool" type="button" id="lapiz">
+                        <input class="rangeTool" id="rangePen" type="range" min="1" max="25" value="5" step="1">
+                </div>
+            </div>
+            <div class="box-filer-input">
+                <div class="box-input">
+                    <input class="inputTool" type="button" id="goma">
+                    <input class="rangeTool" id="rangeGoma" type="range" min="1" max="50" value="15" step="1">
+                </div>
+            </div>
+        </div>
+
+        <div class="box-aux">
+            <input class="inputTool" type="button" id="clear">
+            <input class="inputTool" type="button" id="save">
+        </div>
+    
+    
+    </div>    
+
+    <div class="box-filter">
+        <div class="box-filer-input">
+            <div class="box-input">
+                <input type="button" class="filters" id="sepia">
+                <label for="sepia">Sepia</label>
+            </div>
+                <input class="rangeFilter" id="sepiaAmonut" type="range" min="0" max=100 value="50" step="10">
+        </div>
+        <div class="box-filer-input">
+            <div class="box-input">
+                <input type="button" class="filters" id="b&w">
+                <label for="b&w">Escala de Grises</label>
+            </div>
+                <input class="rangeFilter" id="b&wAmount" type="range" min="0" max="100" value="90" step="10">
+        </div>
+        <div class="box-filer-input">
+            <div class="box-input">
+                <input type="button" class="filters" id="invert">
+                <label for="invert">Invertido</label>
+            </div>
+        </div>
+        <div class="box-filer-input">
+            <div class="box-input">
+                <input type="button" class="filters" id="brillo">
+                <label for="brillo">Brillo</label>
+            </div>
+                <input class="rangeFilter" id="brilloAmount" type="range" min="0" max="100" value="60" step="5">
+        </div>
+        <div class="box-filer-input">
+            <div class="box-input">
+                <input type="button" class="filters" id="binary">
+                <label for="binary">Brinarización</label>
+            </div>
+                <input class="rangeFilter" id="binaryAmount" type="range" min="0" max="100" value="50" step="1">
+        </div>
+        <div class="box-filer-input">
+            <div class="box-input">
+                <input type="button" class="filters" id="satu">
+                <label for="satu">Saturación</label>
+            </div>
+                <input class="rangeFilter" id="satuAmount" type="range" min="0" max="100" value="90" step="10">
+        </div>
+        <div class="box-filer-input">
+            <div class="box-input">
+                <input type="button" class="filters" id="blur">
+                <label for="blur">Desenfoque</label>
+            </div>
+                <input class="rangeFilter" id="blurAmount" type="range" min="1" max="8" value="3" step="10">
+        </div>
     </div>
 
-    <div class="btn-box">
-        <button class="filters" id="sepia"  >Sepia</button>
-        <button class="filters" id="b&w"    >Escala de Grises</button>
-        <button class="filters" id="invert" >Invertido</button>
-        <button class="filters" id="brillo" >Brillo</button>
-        <button class="filters" id="binary" >Brinarización</button>
-        <button class="filters" id="border" >Detección de Bordes</button>
-        <button class="filters" id="satu"   >Saturación</button>
-        <button class="filters" id="blur"   >Desenfoque</button>
-    </div>
+</div>
+
 
     <script src="./js/Pen.js"></script>
     <script src="./js/Picture.js"></script>
-    <script src ="./js/filters/Operador.js"></script>
-    <script src ="./js/filters/CalcSepia.js"></script>
-    <script src ="./js/filters/CalcBW.js"></script>
-    <script src ="./js/filters/CalcInvert.js"></script>
-    <script src ="./js/filters/CalcBright.js"></script>
-    <script src ="./js/filters/CalcBinary.js"></script>
-    <script src ="./js/filters/CalcBlur.js"></script>
-    <script src ="./js/filters/CalcSatu.js"></script>
+    <script src="./js/filters/Operador.js"></script>
+    <script src="./js/filters/CalcSepia.js"></script>
+    <script src="./js/filters/CalcBW.js"></script>
+    <script src="./js/filters/CalcInvert.js"></script>
+    <script src="./js/filters/CalcBright.js"></script>
+    <script src="./js/filters/CalcBinary.js"></script>
+    <script src="./js/filters/CalcBlur.js"></script>
+    <script src="./js/filters/CalcSatu.js"></script>
     <script src="./js/app.js"></script>
 
 </body>
+
 </html>

@@ -5,7 +5,8 @@ class CalcBW extends Operador{
     }
 
     calcFilter(r,g,b){
-        let gray = (r + g + b)/3;
+
+        let gray = (r + g + b) / 3 + (this.intensity-50);
 
         return {'r':gray, 'g':gray, 'b':gray};
     }

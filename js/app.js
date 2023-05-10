@@ -6,8 +6,12 @@ let colorInput  = document.querySelector('#color');
 let clearBtn    = document.querySelector('#clear');
 let saveBtn     = document.querySelector('#save');
 let fileInput   = document.querySelector('#upload');
+let uploadButton = document.querySelector('#uploadButton');
 let cleanImg    = document.querySelector('#cleanImg'); 
 let filtesBtn   = document.querySelectorAll('.filters');
+let rangeFilter = document.querySelectorAll('.rangeFilter');
+let rangePen    = document.querySelector('#rangePen');
+let rangeGoma   = document.querySelector('#rangeGoma');
 
 //////////////////////////////// Setup global variables
 let canvasWidth  = canvas.width;
@@ -15,13 +19,15 @@ let canvasHeight = canvas.height;
 let ctx = canvas.getContext('2d');
 let mouseUp = true;
 let mouseDown = false;
-let backColor = 'yellow';
-let penColor = colorInput.value;
+let backColor = 'white';
 let ancho = 0;
 let pen = null;
 let clicPen = false;
-let colorPen = null;
+let clicBorrar = false;
+let colorPen = colorInput.value; 
 let picture = null;
+let penSize = rangePen.value;
+let gomaSize = rangeGoma.value;
 
 //////////////////////////////// Principal
 
@@ -36,15 +42,14 @@ function main(){
 
 // COLOR 
 colorInput.addEventListener('change', () => {
-    penColor = colorInput.value;
-    clicBorrar = false;
-    clicPen = true;
-    colorPen = penColor;    
-    ancho = 5;
-
+    if(clicPen)
+        colorPen = colorInput.value;    
 });
 
 // CARGAR IMAGEN 
+uploadButton.addEventListener('click', () => {
+    fileInput.click();
+});
 fileInput.addEventListener('change', () => {
     clearCanvas();
     let src = URL.createObjectURL(fileInput.files[0]);
@@ -75,69 +80,112 @@ cleanImg.addEventListener('click', () =>{
 
 // PEN
 penBtn.addEventListener('click', () =>{
-    penBtn.classList.toggle('active_btn');
-
-    if(borraBtn.classList.contains('active_btn'))
-        borraBtn.classList.toggle('active_btn');
-    if(clicPen)
+    if(clicPen){
         clicPen = false;
-    else{
-        clicBorrar = false;
+        penBtn.classList.remove('active-btn');
+        rangePen.classList.remove('expand');
+    }else{
+        if(clicBorrar){
+            clicBorrar = false;
+            borraBtn.classList.remove('active-btn');
+            rangeGoma.classList.remove('expand');
+        }
         clicPen = true;
+        penBtn.classList.add('active-btn');
+        rangePen.classList.add('expand');
         colorPen = colorInput.value;   
-        ancho = 5;
-    }    
+        ancho = penSize;
+    }
+});
+
+// TAMAÑO PEN
+rangePen.addEventListener('change', () =>{
+    penSize = rangePen.value;
+    ancho = penSize;
+});
+rangeGoma.addEventListener('change', () =>{
+    gomaSize = rangeGoma.value;
+    ancho = gomaSize;
 });
 
 // ERASER
 borraBtn.addEventListener('click', (e) => {
-    borraBtn.classList.toggle('active_btn');
-
-    if(penBtn.classList.contains('active_btn'))
-        penBtn.classList.toggle('active_btn');
-    if(clicBorrar)
+  
+    if(clicBorrar){
         clicBorrar = false;
-    else{
+        borraBtn.classList.remove('active-btn');
+        rangeGoma.classList.remove('expand');
+    }else{
+        if (clicPen){
+            clicPen = false;
+            penBtn.classList.remove('active-btn');
+            rangePen.classList.remove('expand');
+        }
         clicBorrar = true;
-        clicPen = false;
+        borraBtn.classList.add('active-btn');
+        rangeGoma.classList.add('expand');
         colorPen = backColor;
-        ancho = 15;
-    }    
+        ancho = gomaSize;
+    }
 });
 
-
 // FILTROS
-
 filtesBtn.forEach( filtro => { filtro.addEventListener('click', () => {
     let idFiltro = filtro.id;
     switch (idFiltro) {
         case 'sepia':
-            picture.filterSepia();
+            picture.filterSepia(rangeFilter[0].value);
             break;
         case 'b&w':
-            picture.filterBW();
+            picture.filterBW(rangeFilter[1].value);
             break;
         case 'invert':
             picture.filterInvert();
             break;
         case 'brillo':
-            picture.filterBright();
+            picture.filterBright(rangeFilter[2].value);
             break;
         case 'binary':
-            picture.filterBinary();
-            break;
-        case 'border':
-            picture.filterBorder();
+            picture.filterBinary(rangeFilter[3].value);
             break;
         case 'satu':
-            picture.filterSatu();
+            picture.filterSatu(rangeFilter[4].value);
             break;
         case 'blur':
-            picture.filterBlur();
+            picture.filterBlur(rangeFilter[5].value);
             break;
     }
 })})
 
+// AMOUNT FILTER
+rangeFilter.forEach( amount => { amount.addEventListener('change', () => {
+    let idFiltro = amount.id;
+    switch (idFiltro) {
+        case 'sepiaAmonut':
+            picture.filterSepia(amount.value);
+            break;
+        case 'b&wAmount':
+            picture.filterBW(amount.value);
+            break;
+        case 'brilloAmount':
+            picture.filterBright(amount.value);
+            break;
+        case 'binaryAmount':
+            picture.filterBinary(amount.value);
+            break;
+        case 'satuAmount':
+            picture.filterSatu(amount.value);
+            break;
+        case 'blurAmount':
+            picture.filterBlur(amount.value);
+            break;
+    }
+})})
+
+colorInput.addEventListener('change', () => {
+    if(clicPen)
+        colorPen = colorInput.value;    
+});
 //////////////// MOUSE event
 
 canvas.addEventListener ('mousedown', (e) => {

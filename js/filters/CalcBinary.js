@@ -1,7 +1,9 @@
 class CalcBinary extends Operador{
     constructor(intensity){
         super();
-        this.intensity = intensity;
+        this.base = 100;
+        // this.base = 147;
+        this.intensity = this.base + (intensity-50/2.5);
     }
 
     calcFilter(r,g,b){
@@ -14,3 +16,5 @@ class CalcBinary extends Operador{
         return {'r':binary, 'g':binary, 'b':binary};
     }
 }
+
+// 147

@@ -20,11 +20,15 @@ class Picture {
         this.img.onload = () => {
             let imgWidth = this.img.naturalWidth;
             let imgHeigth = this.img.naturalHeight;
+            console.log(this.canvasWidth, this.canvasHeight);
+            console.log(imgWidth, imgHeigth);
 
             if(imgWidth > imgHeigth){
                 // resize
                 this.width = this.canvasWidth;
-                this.heigth =  Math.ceil(this.canvasHeight * imgHeigth / imgWidth);
+                this.heigth =  Math.ceil(this.canvasHeight * this.width / this.canvasWidth);
+                // this.heigth =  Math.ceil(this.canvasHeight * imgHeigth / imgWidth);
+                console.log('resized',this.width,this.heigth);
                 // re-posicionar
                 this.posX = 0;
                 this.posY = (this.canvasHeight - this.heigth)/2;
@@ -58,44 +62,41 @@ class Picture {
     }
 
     ///////////////////////////////// FILTROS
-    filterSepia(){
+    filterSepia(amount){
         // instancia objeto de calculo de filtro
-        let calculator = new CalcSepia(0.2);
+        let calculator = new CalcSepia(amount);
         this.aplicarFiltro(calculator);
     }
-    filterBW(){
+    filterBW(amount){
         // instancia objeto de calculo de filtro
-        let calculator = new CalcBW(0.2);
+        let calculator = new CalcBW(amount);
         this.aplicarFiltro(calculator);
     }
     filterInvert(){
         // instancia objeto de calculo de filtro
-        let calculator = new CalcInvert(0.2);
+        let calculator = new CalcInvert(0.0);
         this.aplicarFiltro(calculator);
     }
-    filterBright(){
+    filterBright(amount){
         // instancia objeto de calculo de filtro
-        let calculator = new CalcBright(30);
+        let calculator = new CalcBright(amount);
         this.aplicarFiltro(calculator);
     }
-    filterBinary(){
+    filterBinary(amount){
         // instancia objeto de calculo de filtro
-        let calculator = new CalcBinary(147);
+        console.log(amount,(147) + (amount-50/2.5));
+        let calculator = new CalcBinary(amount);
         this.aplicarFiltro(calculator);
     }
-    filterBorder(){
-        this.clear();
-        let cant = 30;
-
-    }
-    filterSatu(){
+    filterSatu(amount){
         // instancia objeto de calculo de filtro
-        let calculator = new CalcSatu(0.1);
+        let calculator = new CalcSatu(amount);
         this.aplicarFiltro(calculator);
     }
-    filterBlur(){
+    filterBlur(amount){
         // instancia objeto de calculo de filtro
-        let calculator = new CalcBlur(4, this.imageData, this.width, this.heigth);
+        console.log(amount);
+        let calculator = new CalcBlur(amount, this.imageData, this.width, this.heigth);
         this.aplicarFiltro(calculator);
     }
     aplicarFiltro(calculator){

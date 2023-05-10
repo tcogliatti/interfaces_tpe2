@@ -1,7 +1,7 @@
 class CalcBright extends Operador{
     constructor(intensity){
         super();
-        this.intensity = intensity;
+        this.intensity = intensity-50;
     }
 
     calcFilter(r,g,b){
