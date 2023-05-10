@@ -1,7 +1,7 @@
 class CalcBlur extends Operador{
     constructor(intensity, imgDat, width, heigth){
         super();
-        this.intensity = intensity;
+        this.intensity = parseInt(intensity);
         this.imgDat = imgDat;
         this.heigth = heigth;
         this.width = width;

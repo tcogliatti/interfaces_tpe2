@@ -122,34 +122,37 @@ label{
     margin-left: -30px;
     margin-top: 2px;
 }
+#invert{
+    margin-bottom: 16px;
+}
 #lapiz{
     background-image: url("../img/pen2.png");
     background-size: 70% 70%;
-    background-repeat: no-repeat;
-    background-position: center;
+    /* background-repeat: no-repeat;
+    background-position: center; */
     opacity: 80%;
 
 }
 #goma{
     background-image: url("../img/eraser.png");
     background-size: 75% 75%;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 80%;
+    /* background-repeat: no-repeat;
+    background-position: center;*/
+    opacity: 80%; 
 }
 #clear{
     background-image: url("../img/trash.png");
     background-size: 70% 70%;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 80%;
+    /* background-repeat: no-repeat;
+    background-position: center;*/
+     opacity: 80%; 
 }
 #save{
     background-image: url("../img/save.png");
     background-size: 60% 70%;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 80%;
+    /* background-repeat: no-repeat;
+    background-position: center; */
+    opacity: 80%; 
 }
 
 #color {
@@ -164,8 +167,8 @@ label{
 #cleanImg{
     background-image: url("../img/clear.png");
     background-size: 70% 70%;
-    background-repeat: no-repeat;
-    background-position: center;
+    /* background-repeat: no-repeat;
+    background-position: center; */
     height: 35px;
     width: 35px;
     border-radius: 50%;
@@ -175,8 +178,8 @@ label{
 #uploadButton{
     background-image: url("../img/upload.png");
     background-size: 70% 70%;
-    background-repeat: no-repeat;
-    background-position: center;
+    /* background-repeat: no-repeat;
+    background-position: center; */
     height: 35px;
     width: 35px;
     border-radius: 50%;
@@ -189,6 +192,11 @@ label{
     visibility: hidden;
     height: 1px;
     width: 1px;
+}
+.inputTool{
+    background-repeat: no-repeat;
+    background-position: center;
+    /* opacity: 80%; */
 }
 #color::-webkit-color-swatch {
     border: none;
@@ -207,7 +215,7 @@ label{
 .inputTool:hover{
     transform: scale(1.1) ;
     opacity: 100%;
-    transition: transform .2s ease-in-out;
+    transition: transform .1s ease-in-out;
 
 }
 /* .inputTool:hover{

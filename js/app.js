@@ -75,6 +75,7 @@ clearBtn.addEventListener('click', () =>{
 // CLEAR IMAGEN
 cleanImg.addEventListener('click', () =>{
     picture.clear();
+    deselector();
 
 });
 

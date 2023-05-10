@@ -34,7 +34,7 @@ class Picture {
                 this.posY = (this.canvasHeight - this.heigth)/2;
             } else {
                 // resize
-                this.width = Math.ceil(this.canvasWidth * imgWidth / imgHeigth);
+                this.width = Math.ceil(this.canvasWidth * this.heigth / this.canvasHeight);
                 this.heigth = this.canvasHeight;
                 // re-posicionar
                 this.posX = (this.canvasHeight - this.width)/2;
@@ -95,7 +95,6 @@ class Picture {
     }
     filterBlur(amount){
         // instancia objeto de calculo de filtro
-        console.log(amount);
         let calculator = new CalcBlur(amount, this.imageData, this.width, this.heigth);
         this.aplicarFiltro(calculator);
     }
