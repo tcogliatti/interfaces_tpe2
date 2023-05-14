@@ -122,36 +122,28 @@ label{
     margin-left: -30px;
     margin-top: 2px;
 }
-#invert{
+#invert, #sepia, #b\&w{
     margin-bottom: 16px;
 }
 #lapiz{
     background-image: url("../img/pen2.png");
     background-size: 70% 70%;
-    /* background-repeat: no-repeat;
-    background-position: center; */
     opacity: 80%;
 
 }
 #goma{
     background-image: url("../img/eraser.png");
     background-size: 75% 75%;
-    /* background-repeat: no-repeat;
-    background-position: center;*/
     opacity: 80%; 
 }
 #clear{
     background-image: url("../img/trash.png");
     background-size: 70% 70%;
-    /* background-repeat: no-repeat;
-    background-position: center;*/
      opacity: 80%; 
 }
 #save{
     background-image: url("../img/save.png");
     background-size: 60% 70%;
-    /* background-repeat: no-repeat;
-    background-position: center; */
     opacity: 80%; 
 }
 
@@ -167,8 +159,6 @@ label{
 #cleanImg{
     background-image: url("../img/clear.png");
     background-size: 70% 70%;
-    /* background-repeat: no-repeat;
-    background-position: center; */
     height: 35px;
     width: 35px;
     border-radius: 50%;
@@ -178,8 +168,6 @@ label{
 #uploadButton{
     background-image: url("../img/upload.png");
     background-size: 70% 70%;
-    /* background-repeat: no-repeat;
-    background-position: center; */
     height: 35px;
     width: 35px;
     border-radius: 50%;
@@ -196,18 +184,17 @@ label{
 .inputTool{
     background-repeat: no-repeat;
     background-position: center;
-    /* opacity: 80%; */
 }
-#color::-webkit-color-swatch {
+#color::-webkit-color-swatch, #color::-webkit-color-swatch-wrapper {
     border: none;
     border-radius: 100%;
     padding: 0;
 }
-#color::-webkit-color-swatch-wrapper {
+/* #color::-webkit-color-swatch-wrapper {
     border: none;
     border-radius:100%;
     padding: 0;
-}
+} */
 .inputTool:active{
     opacity: 100%;
     background-color: rgb(160, 160, 160);
@@ -249,15 +236,19 @@ label{
 }
 .rangeFilter{
     opacity: 0;
-    height: 0px!important;
+    /* height: 0px!important; */
     margin-top: -16px;
-    transition: height 0.3s ease, opacity .1s ease, margin-top .3s;
+    transition: opacity .1s ease, margin-top .3s;
+    /* transition: height 0.3s ease, opacity .1s ease, margin-top .3s; */
 }
 .rangeFilter.selected{
     margin-top: 10px;
+    margin-bottom: 15px;
     opacity: 1;
     height: 16px!important;
+    /* margin-bottom: 16px; */
 }
-.filters.selected {
-    border-left: 3px solid rgb(251,183,59) !important;
+label.selected {
+    /* border-left: 3px solid rgb(251,183,59) !important; */
+    color: rgb(251,183,59) !important;
 }

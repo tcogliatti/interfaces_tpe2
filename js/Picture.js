@@ -12,6 +12,7 @@ class Picture {
         this.width = null;
         this.heigth = null;
         this.operador = new Operador();
+        this.screenshot = null;
     }
 
     draw(){
@@ -23,7 +24,7 @@ class Picture {
             console.log(this.canvasWidth, this.canvasHeight);
             console.log(imgWidth, imgHeigth);
 
-            if(imgWidth > imgHeigth){
+            if((this.canvasWidth - imgWidth) < (this.canvasHeight - imgHeigth)){
                 // resize
                 this.width = this.canvasWidth;
                 this.heigth =  Math.ceil(this.canvasHeight * this.width / this.canvasWidth);
@@ -34,8 +35,10 @@ class Picture {
                 this.posY = (this.canvasHeight - this.heigth)/2;
             } else {
                 // resize
-                this.width = Math.ceil(this.canvasWidth * this.heigth / this.canvasHeight);
                 this.heigth = this.canvasHeight;
+                this.width = Math.ceil(this.canvasWidth * this.heigth / this.canvasHeight);
+                console.log('resized',this.width,this.heigth);
+
                 // re-posicionar
                 this.posX = (this.canvasHeight - this.width)/2;
                 this.posY = 0;
@@ -50,75 +53,145 @@ class Picture {
             // guardo un BK de imageData
             this.bk = new ImageData(this.width, this.heigth);
             this.bk.data.set(this.imageData.data);
+            this.getScreenShot();
         };
     }
 
-    clear(){
+    refreshImage(){
         // recuperamos el bk de la imagen
         this.imageData = new ImageData(this.width, this.heigth);
         this.imageData.data.set(this.bk.data);
         // redibujamos la imagen        
         this.ctx.putImageData(this.imageData, this.posX, this.posY);
+        this.getScreenShot();
+    }
+    getScreenShot(){
+        // tomamos un screenShot de imagenData
+        this.screenshot = new ImageData(this.width, this.heigth);
+        this.screenshot.data.set(this.imageData.data);
+    }
+    aplyScreenShot(){
+        this.imageData = new ImageData(this.width, this.heigth);
+        this.imageData.data.set(this.screenshot.data);
     }
 
     ///////////////////////////////// FILTROS
-    filterSepia(amount){
+    /*
+        Estos métodos son para activar los filtros
+        Al activar el filtro se aplica el screenshot, que es sobre
+        el cual se desarrolla el ajuste 
+    */
+    filterSepia(){
+        this.aplyScreenShot();
+        this.getScreenShot();
         // instancia objeto de calculo de filtro
-        let calculator = new CalcSepia(amount);
-        this.aplicarFiltro(calculator);
+        let calculator = new CalcSepia(null);
+        this.aplicarFiltro(calculator, this.screenshot);
     }
-    filterBW(amount){
+    filterBW(){
+        this.aplyScreenShot();
+        this.getScreenShot();
         // instancia objeto de calculo de filtro
-        let calculator = new CalcBW(amount);
-        this.aplicarFiltro(calculator);
+        let calculator = new CalcBW(null);
+        this.aplicarFiltro(calculator, this.screenshot);
     }
     filterInvert(){
+        this.aplyScreenShot();
+        this.getScreenShot();
         // instancia objeto de calculo de filtro
-        let calculator = new CalcInvert(0.0);
-        this.aplicarFiltro(calculator);
+        let calculator = new CalcInvert(null);
+        this.aplicarFiltro(calculator, this.screenshot);
     }
     filterBright(amount){
+        this.aplyScreenShot();
+        this.getScreenShot();
         // instancia objeto de calculo de filtro
         let calculator = new CalcBright(amount);
-        this.aplicarFiltro(calculator);
+        this.aplicarFiltro(calculator, this.screenshot);
     }
     filterBinary(amount){
+        this.aplyScreenShot();
+        this.getScreenShot();
         // instancia objeto de calculo de filtro
-        console.log(amount,(147) + (amount-50/2.5));
         let calculator = new CalcBinary(amount);
-        this.aplicarFiltro(calculator);
+        this.aplicarFiltro(calculator, this.screenshot);
     }
     filterSatu(amount){
+        this.aplyScreenShot();
+        this.getScreenShot();
         // instancia objeto de calculo de filtro
         let calculator = new CalcSatu(amount);
-        this.aplicarFiltro(calculator);
+        this.aplicarFiltro(calculator, this.screenshot);
     }
     filterBlur(amount){
+        this.aplyScreenShot();
+        this.getScreenShot();
+        // instancia objeto de calculo de filtro
+        let calculator = new CalcBlur(amount, this.screenshot, this.width, this.heigth);
+        this.aplicarFiltro(calculator, this.screenshot);
+    }
+    filterBorder(){
+        this.aplyScreenShot();
+        this.getScreenShot();
+        // instancia objeto de calculo de filtro
+        let calculator = new CalcBorder(this.screenshot, this.width, this.heigth);
+        this.aplicarFiltro(calculator, this.screenshot);
+    }
+
+    ///////////////////////////////// TUNNING FILTERS
+    /*
+        estos metodos permiten modificar la cantiad de efecto 
+        sin aplicarlo hasta que se aplique otro efecto.
+    */
+    tunningFilterBright(amount){
+        // vuelve al screenshot antes de aplicar el ajuste de filtro
+        this.aplyScreenShot();
+        // instancia objeto de calculo de filtro
+        let calculator = new CalcBright(amount);
+        this.aplicarFiltro(calculator, this.imageData);
+    }
+    tunningFilterBinary(amount){
+        // vuelve al screenshot antes de aplicar el ajuste de filtro
+        this.aplyScreenShot();
+        // instancia objeto de calculo de filtro
+        let calculator = new CalcBinary(amount);
+        this.aplicarFiltro(calculator, this.imageData);
+    }
+    tunningFilterSatu(amount){
+        // vuelve al screenshot antes de aplicar el ajuste de filtro
+        this.aplyScreenShot();
+        // instancia objeto de calculo de filtro
+        let calculator = new CalcSatu(amount);
+        this.aplicarFiltro(calculator, this.imageData);
+    }
+    tunningFilterBlur(amount){
+        // vuelve al screenshot antes de aplicar el ajuste de filtro
+        this.aplyScreenShot();
         // instancia objeto de calculo de filtro
         let calculator = new CalcBlur(amount, this.imageData, this.width, this.heigth);
-        this.aplicarFiltro(calculator);
+        this.aplicarFiltro(calculator, this.imageData);
     }
-    aplicarFiltro(calculator){
-        this.clear();
 
-        let data = this.imageData.data;
+    // APLICAR FILTRO
+    aplicarFiltro(calculator, imgDataToProcesess){ 
+        let data = imgDataToProcesess.data;
         for (let x = 0; x < this.width; x++)
             for (let y = 0; y < this.heigth; y++) {
                let i = (x + y * this.width) * 4;
-
+                // obtiene el pixel original
                 let r = data[i];
                 let g = data[i + 1];
                 let b = data[i + 2];
-                // obtener valor del 
+                // aplica el calculo del filtro
                 let res = calculator.calcFilter(r,g,b,x,y);
-
-                // aplicar al pixel el nuevo valor
+                // pisa el original con el pixel modificado
                 data[i]     = res['r'];
                 data[i + 1] = res['g'];
                 data[i + 2] = res['b'];
             }
-
+        
         // Mostrar la imagen filtrada en el canvas
-        this.ctx.putImageData(this.imageData, this.posX, this.posY);
+        this.ctx.putImageData(imgDataToProcesess, this.posX, this.posY);
     }
+
 }

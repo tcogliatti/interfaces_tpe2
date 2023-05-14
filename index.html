@@ -61,14 +61,12 @@
                     <input type="button" class="filters" id="sepia">
                     <label for="sepia">Sepia</label>
                 </div>
-                <input class="rangeFilter" id="sepiaAmonut" type="range" min="0" max=100 value="50" step="10">
             </div>
             <div class="box-filer-input">
                 <div class="box-input">
                     <input type="button" class="filters" id="b&w">
                     <label for="b&w">Escala de Grises</label>
                 </div>
-                <input class="rangeFilter" id="b&wAmount" type="range" min="0" max="100" value="90" step="10">
             </div>
             <div class="box-filer-input">
                 <div class="box-input">
@@ -88,14 +86,14 @@
                     <input type="button" class="filters" id="binary">
                     <label for="binary">Brinarización</label>
                 </div>
-                <input class="rangeFilter" id="binaryAmount" type="range" min="0" max="100" value="50" step="1">
+                <input class="rangeFilter" id="binaryAmount" type="range" min="-10" max="10" value="0" step="1">
             </div>
             <div class="box-filer-input">
                 <div class="box-input">
                     <input type="button" class="filters" id="satu">
                     <label for="satu">Saturación</label>
                 </div>
-                <input class="rangeFilter" id="satuAmount" type="range" min="0" max="10" value="4" step="1">
+                <input class="rangeFilter" id="satuAmount" type="range" min="10" max="35" value="22" step="1">
             </div>
             <div class="box-filer-input">
                 <div class="box-input">
@@ -103,6 +101,12 @@
                     <label for="blur">Desenfoque</label>
                 </div>
                 <input class="rangeFilter" id="blurAmount" type="range" min="1" max="8" value="3" step="1">
+            </div>
+            <div class="box-filer-input">
+                <div class="box-input">
+                    <input type="button" class="filters" id="border">
+                    <label for="border">Detección de Bordes</label>
+                </div>
             </div>
         </div>
 
@@ -119,6 +123,7 @@
     <script src="./js/filters/CalcBinary.js"></script>
     <script src="./js/filters/CalcBlur.js"></script>
     <script src="./js/filters/CalcSatu.js"></script>
+    <script src="./js/filters/CalcBorder.js"></script>
     <script src="./js/app.js"></script>
 
 </body>
