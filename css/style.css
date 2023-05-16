@@ -1,3 +1,6 @@
+/*
+ *  BLOQUES GENERALES
+ */
 body{
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     display: flex;
@@ -17,12 +20,20 @@ body{
 
 }
 .header h1{
-    margin-left: 170px;
+    margin-left: 200px;
     color: white;
     font-size:30px;
+    margin-bottom:40px;
 }
+    /* font-family: "Comic Sans MS", "Comic Sans", cursive; */
 h1 span{
-    color: rgb(224, 141, 199);
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    position: absolute;
+    font-weight: 900;
+    color: rgb(224, 141, 199);  
+    transform: skew(-2deg, -25deg);
+    margin-left: -25px;
+    margin-top: 15px;
 }
 .header{
     visibility: visible;
@@ -45,7 +56,6 @@ h1 span{
     height: 400px;
     margin-left: 20px;
     display: flex;
-    /* justify-content: space-around; */
     flex-direction: column;
 }
 .filters{
@@ -84,7 +94,6 @@ label{
     display: flex;
     position: relative;
     right: -228px;
-    /* right: -275px; */
     /* right: -350px; */
     top: 40px;
     z-index: 100;
@@ -190,11 +199,7 @@ label{
     border-radius: 100%;
     padding: 0;
 }
-/* #color::-webkit-color-swatch-wrapper {
-    border: none;
-    border-radius:100%;
-    padding: 0;
-} */
+
 .inputTool:active{
     opacity: 100%;
     background-color: rgb(160, 160, 160);
@@ -205,9 +210,7 @@ label{
     transition: transform .1s ease-in-out;
 
 }
-/* .inputTool:hover{
-   transition: .2s ease-in-out;
-} */
+
 .active-btn{
     opacity: 100%!important;
     background-color: rgb(32, 32, 32)!important;
@@ -236,19 +239,30 @@ label{
 }
 .rangeFilter{
     opacity: 0;
-    /* height: 0px!important; */
     margin-top: -16px;
     transition: opacity .1s ease, margin-top .3s;
-    /* transition: height 0.3s ease, opacity .1s ease, margin-top .3s; */
 }
 .rangeFilter.selected{
     margin-top: 10px;
     margin-bottom: 15px;
     opacity: 1;
     height: 16px!important;
-    /* margin-bottom: 16px; */
 }
 label.selected {
-    /* border-left: 3px solid rgb(251,183,59) !important; */
     color: rgb(251,183,59) !important;
+}
+label.disabled {
+    color: rgb(125, 125, 125) !important;
+}
+#cleanImg.disabled{
+    opacity: 60%;
+}
+#cleanImg.disabled:hover{
+    transform: scale(1) ;
+}
+#cleanImg.disabled:active{
+    background-color: #EFEFEF;
+    opacity: 60% !important;
+    border-color: none;
+
 }

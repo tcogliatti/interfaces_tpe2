@@ -22,7 +22,6 @@ class Pen {
         this.ctx.moveTo(this.antX, this.antY);
         this.ctx.lineTo(this.posX, this.posY);
         this.ctx.stroke();
-        // this.ctx.ClosePath();
     }
     getColor(){
         return this.style;

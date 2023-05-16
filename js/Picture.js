@@ -16,31 +16,28 @@ class Picture {
     }
 
     draw(){
-
         // espera a que cargue la imagen y ejecuta el codigo
         this.img.onload = () => {
             let imgWidth = this.img.naturalWidth;
             let imgHeigth = this.img.naturalHeight;
-            console.log(this.canvasWidth, this.canvasHeight);
-            console.log(imgWidth, imgHeigth);
+            // Obtener ratio de escala
+            let scaleRatio = Math.min(this.canvasWidth / imgWidth, this.canvasHeight / imgHeigth);
+            this.width = imgWidth * scaleRatio;
+            this.heigth = imgHeigth * scaleRatio;
 
             if((this.canvasWidth - imgWidth) < (this.canvasHeight - imgHeigth)){
-                // resize
+                // resize a lo ancho
                 this.width = this.canvasWidth;
-                this.heigth =  Math.ceil(this.canvasHeight * this.width / this.canvasWidth);
-                // this.heigth =  Math.ceil(this.canvasHeight * imgHeigth / imgWidth);
-                console.log('resized',this.width,this.heigth);
+                this.heigth =  Math.ceil(imgHeigth * scaleRatio);
                 // re-posicionar
                 this.posX = 0;
                 this.posY = (this.canvasHeight - this.heigth)/2;
             } else {
-                // resize
+                // resize a lo alto
                 this.heigth = this.canvasHeight;
-                this.width = Math.ceil(this.canvasWidth * this.heigth / this.canvasHeight);
-                console.log('resized',this.width,this.heigth);
-
+                this.width = Math.ceil(imgWidth * scaleRatio);
                 // re-posicionar
-                this.posX = (this.canvasHeight - this.width)/2;
+                this.posX = (this.canvasWidth - this.width)/2;
                 this.posY = 0;
             }
             
@@ -189,7 +186,6 @@ class Picture {
                 data[i + 1] = res['g'];
                 data[i + 2] = res['b'];
             }
-        
         // Mostrar la imagen filtrada en el canvas
         this.ctx.putImageData(imgDataToProcesess, this.posX, this.posY);
     }

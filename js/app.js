@@ -29,10 +29,12 @@ let colorPen = colorInput.value;
 let picture = null;
 let penSize = rangePen.value;
 let gomaSize = rangeGoma.value;
+let srcImg = "";
 
 //////////////////////////////// Principal
 function main() {
     clearCanvas();
+    imgControlsActivate(false);
 }
 
 //////// BUTTONS event
@@ -49,12 +51,13 @@ uploadButton.addEventListener('click', () => {
 });
 fileInput.addEventListener('change', () => {
     clearCanvas();
-    let src = URL.createObjectURL(fileInput.files[0]);
-    picture = new Picture(canvasWidth, canvasHeight, ctx, src);
+    srcImg = URL.createObjectURL(fileInput.files[0]);
+    picture = new Picture(canvasWidth, canvasHeight, ctx, srcImg);
     picture.draw();
     // style buttons
-    deselectorRanfeFilter();
+    deselectorRangeFilter();
     deselectorLabelFilter();
+    imgControlsActivate(true);
 });
 
 // SAVE 
@@ -69,8 +72,12 @@ saveBtn.addEventListener('click', () => {
 clearBtn.addEventListener('click', () => {
     clearCanvas();
     // style buttons
-    deselectorRanfeFilter();
+    deselectorRangeFilter();
     deselectorLabelFilter();
+    imgControlsActivate(false);
+    srcImg = '';
+
+
 });
 function clearCanvas() {
     ctx.fillStyle = backColor;
@@ -79,10 +86,14 @@ function clearCanvas() {
 
 // CLEAR IMAGEN
 cleanImg.addEventListener('click', () => {
+    // verifica que exista una imagen cargada
+    if(srcImg == '')
+        return;
     picture.refreshImage();
     // style buttons
-    deselectorRanfeFilter();
+    deselectorRangeFilter();
     deselectorLabelFilter();
+
 });
 
 // PEN
@@ -139,7 +150,10 @@ borraBtn.addEventListener('click', (e) => {
 // FILTROS SWITCH ON
 filtesBtn.forEach(filtro => {
     filtro.addEventListener('click', () => {
-        deselectorRanfeFilter()
+        // verifica que exista una imagen cargada
+        if(srcImg == '')
+            return;
+        deselectorRangeFilter()
         let idFiltro = filtro.id;
         switch (idFiltro) {
             case 'sepia':
@@ -186,6 +200,9 @@ filtesBtn.forEach(filtro => {
 rangeFilter.forEach(amount => {
     amount.addEventListener('change', () => {
         let idFiltro = amount.id;
+        if(srcImg == '')
+            return;
+        // verifica que exista una imagen cargada
         switch (idFiltro) {
             case 'brilloAmount':
                 picture.tunningFilterBright(amount.value);
@@ -203,7 +220,7 @@ rangeFilter.forEach(amount => {
     })
 })
 
-function deselectorRanfeFilter() {
+function deselectorRangeFilter() {
     rangeFilter.forEach(amount => {
         amount.classList.remove('selected')
     });
@@ -236,6 +253,19 @@ canvas.addEventListener('mousemove', (e) => {
     }
 });
 
+function imgControlsActivate(isActivate){
+    if(isActivate){
+        cleanImg.classList.remove('disabled');
+        labels.forEach(filterLabels => {
+            filterLabels.classList.remove('disabled');
+        });
+    }else{
+        cleanImg.classList.add('disabled');
+        labels.forEach(filterLabels => {
+            filterLabels.classList.add('disabled');
+        });
+    }
+}
 
 
 

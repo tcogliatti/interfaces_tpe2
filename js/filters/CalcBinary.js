@@ -1,17 +1,16 @@
 class CalcBinary extends Operador{
     constructor(intensity){
         super();
-        this.base = 100;
+        this.base = 140;
         // this.base = 147;
-        this.intensity = parseInt(intensity);
-        this.umbral = this.base + this.intensity;
-        console.log(this.umbral);
+        this.intensity = parseInt(intensity)-25;
+        console.log(this.intensity);
     }
 
     calcFilter(r,g,b){
-        let prom = (r + g + b)/3
+        let prom = (r + g + b) / 3;
         let binary;
-        if(prom > this.umbral)
+        if(prom > (this.base + this.intensity))
             binary = 255;
         else
             binary = 0;
