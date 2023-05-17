@@ -67,6 +67,7 @@ class Picture {
         this.screenshot = new ImageData(this.width, this.heigth);
         this.screenshot.data.set(this.imageData.data);
     }
+
     aplyScreenShot(){
         this.imageData = new ImageData(this.width, this.heigth);
         this.imageData.data.set(this.screenshot.data);
